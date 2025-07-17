@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پیام‌رسان ایمن | چت گروهی</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- سایدبار کاربران -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="images/chat-logo.png" alt="Chat Logo" class="logo">
+                <h2>پیام‌رسان ایمن</h2>
+            </div>
+            
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-details">
+                    <span id="currentUsername"></span>
+                    <span class="user-status online">آنلاین</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3><i class="fas fa-users"></i> کاربران آنلاین (<span id="onlineCount">0</span>)</h3>
+                <ul id="onlineUsers" class="user-list"></ul>
+            </div>
+            
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> خروج
+                </button>
+            </div>
+        </div>
+        
+        <!-- بخش اصلی چت -->
+        <div class="main-chat">
+            <div class="chat-header">
+                <h2><i class="fas fa-comments"></i> چت گروهی</h2>
+                <div class="chat-actions">
+                    <button id="refreshBtn" class="btn btn-refresh" title="بروزرسانی">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                    <button id="reportBtn" class="btn btn-report" title="گزارش مشکل">
+                        <i class="fas fa-flag"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="chatMessages" class="chat-messages"></div>
+            
+            <div class="chat-input">
+                <form id="messageForm">
+                    <input type="text" id="messageInput" placeholder="پیام خود را بنویسید..." autocomplete="off">
+                    <button type="submit" class="btn btn-send">
+                        <i class="fas fa-paper-plane"></i> ارسال
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- مودال گزارش کاربر -->
+    <div id="reportModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3><i class="fas fa-flag"></i> گزارش کاربر</h3>
+            <form id="reportForm">
+                <div class="form-group">
+                    <label>کاربر مورد نظر</label>
+                    <select id="reportUserSelect" class="form-control">
+                        <option value="">انتخاب کاربر...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>دلیل گزارش</label>
+                    <select id="reportReason" class="form-control">
+                        <option value="spam">ارسال اسپم</option>
+                        <option value="abuse">رفتار توهین‌آمیز</option>
+                        <option value="inappropriate">محتوا نامناسب</option>
+                        <option value="other">سایر موارد</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>توضیحات (اختیاری)</label>
+                    <textarea id="reportDetails" class="form-control" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-submit">
+                    <i class="fas fa-paper-plane"></i> ارسال گزارش
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="js/chat.js"></script>
+</body>
+</html>

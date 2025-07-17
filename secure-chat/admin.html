@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پیام‌رسان ایمن | پنل مدیریت</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- سایدبار مدیریت -->
+        <div class="admin-sidebar">
+            <div class="admin-header">
+                <img src="images/admin-logo.png" alt="Admin Logo" class="logo">
+                <h2>پنل مدیریت</h2>
+            </div>
+            
+            <div class="admin-user-info">
+                <div class="admin-avatar">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="admin-details">
+                    <span id="adminUsername"></span>
+                    <span class="admin-role">مدیر سیستم</span>
+                </div>
+            </div>
+            
+            <nav class="admin-menu">
+                <ul>
+                    <li class="active" data-tab="users-tab">
+                        <i class="fas fa-users"></i> مدیریت کاربران
+                    </li>
+                    <li data-tab="messages-tab">
+                        <i class="fas fa-comments"></i> مدیریت پیام‌ها
+                    </li>
+                    <li data-tab="reports-tab">
+                        <i class="fas fa-flag"></i> گزارشات کاربران
+                    </li>
+                    <li data-tab="analytics-tab">
+                        <i class="fas fa-chart-bar"></i> آمار و آنالیز
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="admin-footer">
+                <button id="adminLogoutBtn" class="btn btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> خروج از پنل
+                </button>
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی مدیریت -->
+        <div class="admin-content">
+            <div class="content-header">
+                <h2 id="adminTabTitle">مدیریت کاربران</h2>
+                <div class="admin-actions">
+                    <button id="refreshAdminBtn" class="btn btn-refresh" title="بروزرسانی">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- تب مدیریت کاربران -->
+            <div id="users-tab" class="admin-tab active">
+                <div class="admin-toolbar">
+                    <div class="search-box">
+                        <input type="text" id="userSearch" placeholder="جستجوی کاربران...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <button id="blockUserBtn" class="btn btn-danger">
+                        <i class="fas fa-ban"></i> بلاک کاربر انتخاب شده
+                    </button>
+                    <button id="deleteUserBtn" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i> حذف کاربر انتخاب شده
+                    </button>
+                </div>
+                
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="selectAllUsers"></th>
+                                <th>نام کاربری</th>
+                                <th>تاریخ عضویت</th>
+                                <th>آخرین ورود</th>
+                                <th>تعداد گزارشات</th>
+                                <th>وضعیت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- کاربران به صورت داینامیک پر می‌شوند -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- تب مدیریت پیام‌ها -->
+            <div id="messages-tab" class="admin-tab">
+                <div class="admin-toolbar">
+                    <div class="search-box">
+                        <input type="text" id="messageSearch" placeholder="جستجوی پیام‌ها...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <button id="deleteMessageBtn" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i> حذف پیام انتخاب شده
+                    </button>
+                </div>
+                
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="selectAllMessages"></th>
+                                <th>فرستنده</th>
+                                <th>پیام</th>
+                                <th>زمان ارسال</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="messagesTableBody">
+                            <!-- پیام‌ها به صورت داینامیک پر می‌شوند -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- تب گزارشات کاربران -->
+            <div id="reports-tab" class="admin-tab">
+                <div class="admin-toolbar">
+                    <div class="search-box">
+                        <input type="text" id="reportSearch" placeholder="جستجوی گزارشات...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="filter-group">
+                        <label>فیلتر وضعیت:</label>
+                        <select id="reportStatusFilter">
+                            <option value="all">همه</option>
+                            <option value="resolved">رسیدگی شده</option>
+                            <option value="unresolved">رسیدگی نشده</option>
+                        </select>
+                    </div>
+                    <button id="resolveReportBtn" class="btn btn-success">
+                        <i class="fas fa-check"></i> رسیدگی به گزارش انتخاب شده
+                    </button>
+                </div>
+                
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="selectAllReports"></th>
+                                <th>کاربر گزارش دهنده</th>
+                                <th>کاربر گزارش شده</th>
+                                <th>دلیل</th>
+                                <th>توضیحات</th>
+                                <th>زمان گزارش</th>
+                                <th>وضعیت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportsTableBody">
+                            <!-- گزارشات به صورت داینامیک پر می‌شوند -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- تب آمار و آنالیز -->
+            <div id="analytics-tab" class="admin-tab">
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <i class="fas fa-users"></i>
+                            <h3>کاربران ثبت‌نام شده</h3>
+                        </div>
+                        <div class="card-body">
+                            <span id="totalUsers">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <i class="fas fa-comment"></i>
+                            <h3>تعداد پیام‌ها</h3>
+                        </div>
+                        <div class="card-body">
+                            <span id="totalMessages">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <i class="fas fa-flag"></i>
+                            <h3>گزارشات رسیدگی نشده</h3>
+                        </div>
+                        <div class="card-body">
+                            <span id="unresolvedReports">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <i class="fas fa-user-slash"></i>
+                            <h3>کاربران بلاک شده</h3>
+                        </div>
+                        <div class="card-body">
+                            <span id="blockedUsers">0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="usersChart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="messagesChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- مودال تأیید اقدامات -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h3 id="confirmModalTitle">تأیید عملیات</h3>
+            <p id="confirmModalMessage">آیا از انجام این عمل مطمئن هستید؟</p>
+            <div class="modal-actions">
+                <button id="confirmActionBtn" class="btn btn-danger">تأیید</button>
+                <button id="cancelActionBtn" class="btn btn-secondary">انصراف</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

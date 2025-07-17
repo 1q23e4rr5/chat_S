@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پیام‌رسان ایمن | ورود</title>
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <img src="images/secure-chat-logo.png" alt="Secure Chat Logo" class="logo">
+                <h1>پیام‌رسان ایمن گروهی</h1>
+            </div>
+            
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="username"><i class="fas fa-user"></i> نام کاربری</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> رمز عبور</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="siteKey"><i class="fas fa-key"></i> رمز سایت</label>
+                    <input type="password" id="siteKey" name="siteKey" required>
+                    <div class="hint">رمز سایت را فقط کاربران مجاز می‌دانند</div>
+                </div>
+                
+                <button type="submit" class="auth-btn">
+                    <i class="fas fa-sign-in-alt"></i> ورود به چت
+                </button>
+                
+                <div id="errorMsg" class="error-message"></div>
+            </form>
+            
+            <div class="auth-footer">
+                <p>سیستم پیام‌رسان ایمن گروهی - نسخه 1.0</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/auth.js"></script>
+</body>
+</html>
